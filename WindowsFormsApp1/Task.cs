@@ -32,9 +32,20 @@ namespace WindowsFormsApp1
                 predecessor.timeOfFinishOperationP1
             ) + timeP1;
             timeOfFinishOperationP2 = Math.Max(
-                timeOfFinishOperationP1 - timeP1 + timeD,
+                timeOfFinishOperationR + timeD,
                 predecessor.timeOfFinishOperationP2
             ) + timeP2;
+        }
+        public int CompareTo(Task second)
+        {
+            int sum1 = timeP1 + timeP2;
+            int sum2 = second.timeP1 + second.timeP2;
+            int compareDate = sum1.CompareTo(sum2);
+            if (compareDate == 0)
+            {
+                return timeD.CompareTo(second.timeD);
+            }
+            return compareDate;
         }
         public override string ToString()
         {
