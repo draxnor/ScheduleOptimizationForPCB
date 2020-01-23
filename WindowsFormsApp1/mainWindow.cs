@@ -65,6 +65,11 @@ namespace WindowsFormsApp1
         private void dodajZadaniaZPlikuButton_Click(object sender, EventArgs e)
         {
             importZadan_label.Visible = false;
+
+            List<ListViewItem> listOfLVItems = new List<ListViewItem>();
+            List<Task> listOfTasks = new List<Task>();
+            bool isDataCorrect = true;
+
             try
             {   // Open the text file using a stream reader.
                 using (StreamReader sr = new StreamReader("./zadania.csv"))
@@ -72,7 +77,6 @@ namespace WindowsFormsApp1
                     // Read the stream to a string, and write the string to the console.
                     string line;
                     int number;
-                    bool isDataCorrect = true;
                     int nazwa=-1, id=-1, r=-1, d=-1, p1=-1, p2=-1;
                     line = sr.ReadLine();
                     string[] label_line = line.Split(new char[] { ' ', '\t', ';' }, StringSplitOptions.RemoveEmptyEntries);
@@ -104,6 +108,8 @@ namespace WindowsFormsApp1
                     {
                         importZadan_label.Visible = true;
                         importZadan_label.Text = "Błędny format danych w pliku - etykiety kolumn.";
+                        isDataCorrect = false;
+                        return;
                     }
                     int[] numericDataIndexes = { id, r, d, p1, p2 };
 
@@ -120,6 +126,8 @@ namespace WindowsFormsApp1
                         {
                             if(!int.TryParse(line_elems[i], out number))
                             {
+                                importZadan_label.Visible = true;
+                                importZadan_label.Text = "Błąd importu. Nieznane znaki w danych liczbowych.";
                                 isDataCorrect = false;
                                 break;
                             }
@@ -130,32 +138,23 @@ namespace WindowsFormsApp1
                         {
                             importZadan_label.Visible = true;
                             importZadan_label.Text = "Zduplikowane ID.";
-                            break;
-                        }
-                        if (int.Parse(line_elems[d]) > int.Parse(line_elems[p1]))
-                        {
-                            importZadan_label.Visible = true;
-                            importZadan_label.Text = "Błędne wartości danych wejściowych (d>p1).";
+                            isDataCorrect = false;
                             break;
                         }
 
+                        if(isDataCorrect)
+                            if (int.Parse(line_elems[d]) > int.Parse(line_elems[p1]))
+                            {
+                                importZadan_label.Visible = true;
+                                importZadan_label.Text = "Błędne wartości danych wejściowych (d>p1).";
+                                isDataCorrect = false;
+                            }
 
                         if (isDataCorrect)
                         {
                             string[] itemAsStringTab = { line_elems[nazwa], line_elems[id], line_elems[r], line_elems[d], line_elems[p1], line_elems[p2] };
-                            ListViewItem newitem = new ListViewItem(itemAsStringTab);
-                            listView1.Items.Add(newitem);
-
-                            aplication.addTask(int.Parse(line_elems[id]), int.Parse(line_elems[r]), int.Parse(line_elems[d]), int.Parse(line_elems[p1]), int.Parse(line_elems[p2]));
-                            IDlist.Add(int.Parse(line_elems[id]));
-
-                            usunWszystkieZadaniaButton.Visible = true;
-                            wyswietlHarmonogramButton.Visible = true;
-                        }
-                        else
-                        {
-                            importZadan_label.Visible = true;
-                            importZadan_label.Text = "Błędny format danych w pliku.";
+                            listOfLVItems.Add(new ListViewItem(itemAsStringTab));
+                            listOfTasks.Add(new Task(int.Parse(line_elems[id]), int.Parse(line_elems[r]), int.Parse(line_elems[d]), int.Parse(line_elems[p1]), int.Parse(line_elems[p2])));
                         }
                        
                     } while (line != null & isDataCorrect);
@@ -166,6 +165,21 @@ namespace WindowsFormsApp1
                 importZadan_label.Visible = true;
                 importZadan_label.Text = "Błąd przy otwarciu pliku.";
             }
+
+            if(isDataCorrect)
+            {
+                foreach( ListViewItem item in listOfLVItems)
+                    listView1.Items.Add(item);
+                foreach(Task item in listOfTasks)
+                {
+                    aplication.addTask(item);
+                    IDlist.Add(item.taskId);
+                }
+                usunWszystkieZadaniaButton.Visible = true;
+                wyswietlHarmonogramButton.Visible = true;
+            }
+
+
         }
 
             private void edytujZadanieButton_Click(object sender, EventArgs e)

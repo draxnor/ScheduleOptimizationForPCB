@@ -33,6 +33,15 @@ namespace WindowsFormsApp1
             return orderOfTasks;
         }
 
+        public List<Task> addTask(Task newTask)
+        {
+            orderOfTasks.Add(new Task(newTask));
+            CompareTask compareTask = new CompareTask();
+            orderOfTasks.Sort(compareTask);
+            calculateNewOrder();
+            return orderOfTasks;
+        }
+
         public void removeByID(int id_)
         {
             foreach (Task task in orderOfTasks)

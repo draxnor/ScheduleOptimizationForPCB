@@ -94,13 +94,14 @@ namespace WindowsFormsApp1
                 id_komunikat_label.Text = "Zduplikowane ID. Wprowadź unikalne.";
                 isAllDataCorrect = false;
             }
-            if (mainWindow.IDlist.Contains(int.Parse(id_textbox.Text)))
-            {
-                id_komunikat_label.Visible = true;
-                id_komunikat_label.Text = "Zduplikowane ID. Wprowadź unikalne.";
-                isAllDataCorrect = false;
-            }
-            // todo case d >p1
+
+            if(isAllDataCorrect)
+                if( int.Parse(p1_textBox.Text) < int.Parse(d_textBox.Text) )
+                {
+                    d_komunikat_label.Visible = true;
+                    d_komunikat_label.Text = "Nieprawdilowa wartość (d > p1).";
+                    isAllDataCorrect = false;
+                }
 
             if (isAllDataCorrect)
             {
