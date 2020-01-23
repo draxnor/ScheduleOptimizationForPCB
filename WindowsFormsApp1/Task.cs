@@ -26,13 +26,13 @@ namespace WindowsFormsApp1
         }
         public void caluclateTimes(Task predecessor)
         {
-            timeOfFinishOperationR = predecessor.timeOfFinishOperationR + timeR; //timeR, jeśli nie traktować R jako kolejną maszyne
+            timeOfFinishOperationR = timeR; //predecessor.timeOfFinishOperationR + timeR, jeśli traktować R jako kolejną maszyne
             timeOfFinishOperationP1 = Math.Max(
                 timeOfFinishOperationR,
                 predecessor.timeOfFinishOperationP1
             ) + timeP1;
             timeOfFinishOperationP2 = Math.Max(
-                timeOfFinishOperationR + timeD,
+                timeOfFinishOperationP1 - timeP1 + timeD,
                 predecessor.timeOfFinishOperationP2
             ) + timeP2;
         }
@@ -49,7 +49,7 @@ namespace WindowsFormsApp1
         }
         public override string ToString()
         {
-            return "Task: " + taskId + " " + timeR + " " + timeP1 + " " + timeD + " " + timeP2;
+            return "Task: " + taskId + " R:" + timeR + " P1:" + timeP1 + " D:" + timeD + " P2:" + timeP2;
         }
         public int taskId { get; }
         public int timeOfFinishOperationR { get; set; }

@@ -28,7 +28,7 @@ namespace WindowsFormsApp1
             orderOfTasks.Add(new Task(id_, timeR_, timeD_, timeP1_, timeP2_));
             int Cmax = calculateFinishTime();
             GFG gg = new GFG();
-            orderOfTasks.Sort(gg);
+            orderOfTasks.Sort(gg); // to nie jest NEH tylko ustawianie największego elementu w najlepszym miejscu :<
             int newCmax = Cmax;
             List<Task> theBestOrderOfTasks = saveTheBestOrderOfTasks();
             for (int i = orderOfTasks.Count - 1; i > 0; --i)
@@ -66,20 +66,13 @@ namespace WindowsFormsApp1
 
         private int calculateFinishTime()
         {
-            int i = 0;
             Task predecessor = orderOfTasks[0];
-            foreach (Task task in orderOfTasks)
+
+            orderOfTasks[0].caluclateTimes();
+            foreach (Task task in orderOfTasks.Skip(0))
             {
-                if (i != 0)
-                {
-                    task.caluclateTimes(predecessor);
-                }
-                else
-                {
-                    task.caluclateTimes();
-                }
+                task.caluclateTimes(predecessor);
                 predecessor = task;
-                ++i;
             }
             return predecessor.timeOfFinishOperationP2;
         }

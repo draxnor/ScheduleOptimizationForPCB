@@ -28,18 +28,6 @@ namespace WindowsFormsApp1
                     
                     usunWszystkieZadaniaButton.Visible = true;
                     wyswietlHarmonogramButton.Visible = true;
-                    foreach (Task it in aplication.getOrderOfTasks())
-                    {
-                        
-                        Console.WriteLine(" r:");
-                        Console.WriteLine(it.timeR.ToString());
-                        Console.WriteLine(" d:");
-                        Console.WriteLine(it.timeD.ToString());
-                        Console.WriteLine(" p1:");
-                        Console.WriteLine(it.timeP1.ToString());
-                        Console.WriteLine(" p2:");
-                        Console.WriteLine(it.timeP2.ToString());
-                    }
 
                 }
             }
