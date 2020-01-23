@@ -5,10 +5,10 @@ using System.Collections.Generic;
 
 namespace WindowsFormsApp1
 {
-    public partial class Form1 : Form
+    public partial class mainWindow : Form
     {
 
-        public Form1()
+        public mainWindow()
         {
             InitializeComponent();
 
@@ -17,14 +17,14 @@ namespace WindowsFormsApp1
         private void dodajZadanieButton_Click(object sender, EventArgs e)
         {
 
-            using (Form2 okno = new Form2("Dodaj zadanie"))
+            using (addEditWindow addWindowObj = new addEditWindow("Dodaj zadanie"))
             {
-                if (okno.ShowDialog() == DialogResult.OK)
+                if (addWindowObj.ShowDialog() == DialogResult.OK)
                 {
-                    String[] daneZForm2 = okno.CommunicationStuff;
-                    ListViewItem itemListy = new ListViewItem(daneZForm2);
-                    listView1.Items.Add(itemListy);
-                    aplication.addTask(int.Parse(daneZForm2[1]), int.Parse(daneZForm2[2]), int.Parse(daneZForm2[3]), int.Parse(daneZForm2[4]), int.Parse(daneZForm2[5]));
+                    String[] dataFromAddWindow = addWindowObj.commWithMainWindow;
+                    ListViewItem newLVItem = new ListViewItem(dataFromAddWindow);
+                    listView1.Items.Add(newLVItem);
+                    aplication.addTask(int.Parse(dataFromAddWindow[1]), int.Parse(dataFromAddWindow[2]), int.Parse(dataFromAddWindow[3]), int.Parse(dataFromAddWindow[4]), int.Parse(dataFromAddWindow[5]));
                     
                     usunWszystkieZadaniaButton.Visible = true;
                     wyswietlHarmonogramButton.Visible = true;
@@ -57,18 +57,17 @@ namespace WindowsFormsApp1
         private void wyswietlHarmonogramButton_Click(object sender, EventArgs e)
         {
 
-            using (Form3 harmonogram = new Form3())
-            {
-                harmonogram.ShowDialog();
-            }
+            displayChartWindow harmonogram = new displayChartWindow();
+            harmonogram.ShowDialog();
         }
+
 
         private void dodajZadaniaZPlikuButton_Click(object sender, EventArgs e)
         {
             importZadan_label.Visible = false;
             try
             {   // Open the text file using a stream reader.
-                using (StreamReader sr = new StreamReader("zadania.csv"))
+                using (StreamReader sr = new StreamReader("./zadania.csv"))
                 {
                     // Read the stream to a string, and write the string to the console.
                     string line;
@@ -133,9 +132,15 @@ namespace WindowsFormsApp1
                             importZadan_label.Text = "Zduplikowane ID.";
                             break;
                         }
-                            
+                        if (int.Parse(line_elems[d]) > int.Parse(line_elems[p1]))
+                        {
+                            importZadan_label.Visible = true;
+                            importZadan_label.Text = "Błędne wartości danych wejściowych (d>p1).";
+                            break;
+                        }
 
-                            if (isDataCorrect)
+
+                        if (isDataCorrect)
                         {
                             string[] itemAsStringTab = { line_elems[nazwa], line_elems[id], line_elems[r], line_elems[d], line_elems[p1], line_elems[p2] };
                             ListViewItem newitem = new ListViewItem(itemAsStringTab);
@@ -166,15 +171,15 @@ namespace WindowsFormsApp1
             private void edytujZadanieButton_Click(object sender, EventArgs e)
         {
             ListViewItem wybrane = listView1.SelectedItems[0];
-            String[] daneZadania = { wybrane.SubItems[0].Text, wybrane.SubItems[1].Text, wybrane.SubItems[2].Text, wybrane.SubItems[3].Text, wybrane.SubItems[4].Text, wybrane.SubItems[5].Text };
-            using (Form2 okno = new Form2("Edytuj zadanie",daneZadania))
+            String[] existingData = { wybrane.SubItems[0].Text, wybrane.SubItems[1].Text, wybrane.SubItems[2].Text, wybrane.SubItems[3].Text, wybrane.SubItems[4].Text, wybrane.SubItems[5].Text };
+            using (addEditWindow editWindowObj = new addEditWindow("Edytuj zadanie",existingData))
             {
-                if (okno.ShowDialog() == DialogResult.OK)
+                if (editWindowObj.ShowDialog() == DialogResult.OK)
                 {
-                    String[] daneZForm2 = okno.CommunicationStuff;
-                    for (int i = 0; i < daneZForm2.Length ; i++)
+                    String[] dataFromEditWindow = editWindowObj.commWithMainWindow;
+                    for (int i = 0; i < dataFromEditWindow.Length ; i++)
                     {
-                        listView1.SelectedItems[0].SubItems[i].Text = daneZForm2[i];
+                        listView1.SelectedItems[0].SubItems[i].Text = dataFromEditWindow[i];
                     }
                 }
             }

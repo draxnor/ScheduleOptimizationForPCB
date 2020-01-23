@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-    public partial class Form3 : Form
+    public partial class displayChartWindow : Form
     {
-        public Form3()
+        public displayChartWindow()
         {
             InitializeComponent();
         }
@@ -36,32 +36,23 @@ namespace WindowsFormsApp1
             br.Add(new SolidBrush(Color.Gray));
             br.Add(new SolidBrush(Color.Green));
 
-            if (Form1.aplication.getOrderOfTasks().Count < 1)
+            if (mainWindow.aplication.getOrderOfTasks().Count < 1)
             {
                 return;
             }
 
             int xP1, wP1, yP1, xP2, wP2, yP2, h = 30;
             int x0 = 50;
-            int n = Form1.aplication.getOrderOfTasks().Count;
+            int n = mainWindow.aplication.getOrderOfTasks().Count;
 
-            // do usuniecia potem
-            foreach (Task it in Form1.aplication.getOrderOfTasks())
-            {
-                Console.WriteLine(" p1:");
-                Console.WriteLine(it.timeOfFinishOperationP1.ToString());
-                Console.WriteLine(" p2:");
-                Console.WriteLine(it.timeOfFinishOperationP2.ToString());
-            }
-                
 
             for (int i = 0; i < n; i++)
             {
-                xP1 = x0+(Form1.aplication.getOrderOfTasks()[i].timeOfFinishOperationP1 - Form1.aplication.getOrderOfTasks()[i].timeP1) * 10;
-                wP1 = Form1.aplication.getOrderOfTasks()[i].timeP1 * 30;
+                xP1 = x0+(mainWindow.aplication.getOrderOfTasks()[i].timeOfFinishOperationP1 - mainWindow.aplication.getOrderOfTasks()[i].timeP1) * 10;
+                wP1 = mainWindow.aplication.getOrderOfTasks()[i].timeP1 * 30;
                 yP1 = 0;
-                xP2 = x0 + (Form1.aplication.getOrderOfTasks()[i].timeOfFinishOperationP2 - Form1.aplication.getOrderOfTasks()[i].timeP2) * 10;
-                wP2 = Form1.aplication.getOrderOfTasks()[i].timeP2 * 30;
+                xP2 = x0 + (mainWindow.aplication.getOrderOfTasks()[i].timeOfFinishOperationP2 - mainWindow.aplication.getOrderOfTasks()[i].timeP2) * 10;
+                wP2 = mainWindow.aplication.getOrderOfTasks()[i].timeP2 * 30;
                 yP2 = 50;
 
                 G.FillRectangle(br[i % 5], xP1, yP1, wP1, h);
@@ -71,7 +62,7 @@ namespace WindowsFormsApp1
             G.DrawString("SMD", myFont, Brushes.Black, new PointF(2, 0));
             G.DrawString("THT", myFont, Brushes.Black, new PointF(2, 50));
 
-            cmax_textbox.Text = Form1.aplication.getOrderOfTasks()[n - 1].timeOfFinishOperationP2.ToString();
+            cmax_textbox.Text = mainWindow.aplication.getOrderOfTasks()[n - 1].timeOfFinishOperationP2.ToString();
         }
 
         private void zamknij_button_Click(object sender, EventArgs e)

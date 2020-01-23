@@ -8,15 +8,16 @@ namespace WindowsFormsApp1
 {
     public class Aplication
     {
-        private List<Task> saveTheBestOrderOfTasks()
+        private List<Task> cloneOrderOfTasks(List<Task> newtheBestOrderOfTasks)
         {
-            List<Task> theBestOrderOfTasks = new List<Task>(orderOfTasks.Count);
-            foreach (Task task in orderOfTasks)
+            List<Task> theBestOrderOfTasks = new List<Task>(newtheBestOrderOfTasks.Count);
+            foreach (Task task in newtheBestOrderOfTasks)
             {
-                theBestOrderOfTasks.Add(task);
+                theBestOrderOfTasks.Add(new Task(task));
             }
             return theBestOrderOfTasks;
         }
+
         private void swap(List<Task> objectArray, int x, int y)
         {
             Task buffer = objectArray[x];
@@ -26,23 +27,9 @@ namespace WindowsFormsApp1
         public List<Task> addTask(int id_, int timeR_, int timeD_, int timeP1_, int timeP2_)
         {
             orderOfTasks.Add(new Task(id_, timeR_, timeD_, timeP1_, timeP2_));
-            int Cmax = calculateFinishTime();
-            GFG gg = new GFG();
-            orderOfTasks.Sort(gg); // to nie jest NEH tylko ustawianie największego elementu w najlepszym miejscu :<
-            int newCmax = Cmax;
-            List<Task> theBestOrderOfTasks = saveTheBestOrderOfTasks();
-            for (int i = orderOfTasks.Count - 1; i > 0; --i)
-            {
-                swap(orderOfTasks, i - 1, i);
-                newCmax = calculateFinishTime();
-                if (newCmax < Cmax)
-                {
-                    Cmax = newCmax;
-                    theBestOrderOfTasks = saveTheBestOrderOfTasks();
-                }
-            }
-            orderOfTasks = theBestOrderOfTasks;
-            calculateFinishTime();
+            CompareTask compareTask = new CompareTask();
+            orderOfTasks.Sort(compareTask);
+            calculateNewOrder();
             return orderOfTasks;
         }
 
@@ -64,19 +51,44 @@ namespace WindowsFormsApp1
             orderOfTasks.Clear();
         }
 
-        private int calculateFinishTime()
+        private int calculateFinishTime(List<Task> listOfTask)
         {
-            Task predecessor = orderOfTasks[0];
-
-            orderOfTasks[0].caluclateTimes();
-            foreach (Task task in orderOfTasks.Skip(0))
+            Task predecessor = listOfTask[0];
+            listOfTask[0].caluclateTimes();
+            foreach (Task task in listOfTask.Skip(1))
             {
                 task.caluclateTimes(predecessor);
                 predecessor = task;
             }
             return predecessor.timeOfFinishOperationP2;
         }
-
+        private void calculateNewOrder()
+        {
+            List<Task> Subset = new List<Task>();
+            foreach (Task task in orderOfTasks)
+            {
+                Subset.Add(new Task(task));
+                calculateNewOrderOfSubset(Subset);
+            }
+            orderOfTasks = Subset;
+        }
+        private void calculateNewOrderOfSubset(List<Task> listOfTask)
+        {
+            int Cmax = calculateFinishTime(listOfTask);
+            int newCmax = Cmax;
+            List<Task> theBestOrderOfTasks = cloneOrderOfTasks(listOfTask);
+            for (int i = listOfTask.Count - 1; i > 0; --i)
+            {
+                swap(listOfTask, i - 1, i);
+                newCmax = calculateFinishTime(listOfTask);
+                if (newCmax < Cmax)
+                {
+                    Cmax = newCmax;
+                    theBestOrderOfTasks = cloneOrderOfTasks(listOfTask);
+                }
+            }
+            listOfTask = theBestOrderOfTasks;
+        }
         private List<Task> orderOfTasks = new List<Task>();
         public List<Task> getOrderOfTasks() { return orderOfTasks; }
     }

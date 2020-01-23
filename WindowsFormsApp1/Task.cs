@@ -18,6 +18,16 @@ namespace WindowsFormsApp1
             
             caluclateTimes();
         }
+        public Task(Task oder)
+        {
+            taskId = oder.taskId;
+            timeR = oder.timeR;
+            timeP1 = oder.timeP1;
+            timeD = oder.timeD;
+            timeP2 = oder.timeP2;
+            caluclateTimes();
+        }
+
         public void caluclateTimes()
         {
             timeOfFinishOperationR = timeR;
@@ -26,7 +36,7 @@ namespace WindowsFormsApp1
         }
         public void caluclateTimes(Task predecessor)
         {
-            timeOfFinishOperationR = timeR; //predecessor.timeOfFinishOperationR + timeR, jeśli traktować R jako kolejną maszyne
+            timeOfFinishOperationR = timeR; 
             timeOfFinishOperationP1 = Math.Max(
                 timeOfFinishOperationR,
                 predecessor.timeOfFinishOperationP1
@@ -49,15 +59,19 @@ namespace WindowsFormsApp1
         }
         public override string ToString()
         {
-            return "Task: " + taskId + " R:" + timeR + " P1:" + timeP1 + " D:" + timeD + " P2:" + timeP2;
+            return "Task: " + taskId + " R:" + timeR + " P1:" + timeP1 + " D:" + timeD + " P2:" + timeP2 + "\n" +
+                    timeOfFinishOperationR + " " + timeOfFinishOperationP1 + " " + timeOfFinishOperationP2;
         }
-        public int taskId { get; }
+
         public int timeOfFinishOperationR { get; set; }
         public int timeOfFinishOperationP1 { get; set; }
         public int timeOfFinishOperationP2 { get; set; }
-        public int timeP1 { get; }
+
+        public int taskId { get; }
         public int timeR { get; }
-        public int timeP2 { get; }
         public int timeD { get; }
+        public int timeP1 { get; }
+        public int timeP2 { get; }
+        
     }
 }

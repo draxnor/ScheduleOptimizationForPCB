@@ -3,19 +3,19 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-    public partial class Form2 : Form
+    public partial class addEditWindow : Form
     {
-        public Form2()
+        public addEditWindow()
         {
             InitializeComponent();
         }
-        public Form2(String nazwaPrzycisku)
+        public addEditWindow(String nazwaPrzycisku)
         {
             InitializeComponent();
             dodajZadanie_button.Text = nazwaPrzycisku;
 
         }
-        public Form2(String nazwaPrzycisku, String[] daneTextBox)
+        public addEditWindow(String nazwaPrzycisku, String[] daneTextBox)
         {
             InitializeComponent();
             if(daneTextBox.Length == 6)
@@ -86,20 +86,27 @@ namespace WindowsFormsApp1
             {
                 p2_komunikat_label.Visible = true;
                 p2_komunikat_label.Text = "Nieprawidłowa wartość. Wprowadź liczbę.";
-                isAllDataCorrect = false;
+                isAllDataCorrect = false; 
             }
-            if( Form1.IDlist.Contains(int.Parse(id_textbox.Text)))
+            if( mainWindow.IDlist.Contains(int.Parse(id_textbox.Text)))
             {
                 id_komunikat_label.Visible = true;
                 id_komunikat_label.Text = "Zduplikowane ID. Wprowadź unikalne.";
                 isAllDataCorrect = false;
             }
+            if (mainWindow.IDlist.Contains(int.Parse(id_textbox.Text)))
+            {
+                id_komunikat_label.Visible = true;
+                id_komunikat_label.Text = "Zduplikowane ID. Wprowadź unikalne.";
+                isAllDataCorrect = false;
+            }
+            // todo case d >p1
 
             if (isAllDataCorrect)
             {
-                Form1.IDlist.Remove(edytowane_id);
-                Form1.IDlist.Add(int.Parse(id_textbox.Text));
-                CommunicationStuff = new string[] {  nazwa_textBox.Text, id_textbox.Text, r_textBox.Text, d_textBox.Text, p1_textBox.Text, p2_textBox.Text };
+                mainWindow.IDlist.Remove(edytowane_id);
+                mainWindow.IDlist.Add(int.Parse(id_textbox.Text));
+                commWithMainWindow = new string[] {  nazwa_textBox.Text, id_textbox.Text, r_textBox.Text, d_textBox.Text, p1_textBox.Text, p2_textBox.Text };
                 DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -111,7 +118,7 @@ namespace WindowsFormsApp1
             this.Close();
         }
 
-        public string[] CommunicationStuff { get; set; }
+        public string[] commWithMainWindow { get; set; }
 
         int edytowane_id = -1;
     }
