@@ -48,14 +48,14 @@ namespace WindowsFormsApp1
             id_komunikat_label.Visible = false;
 
             bool isAllDataCorrect = true;
-            int number;
+            uint number;
 
 
 
-            if (!int.TryParse(id_textbox.Text, out number))
+            if (!uint.TryParse(id_textbox.Text, out number))
             {
                 id_komunikat_label.Visible = true;
-                id_komunikat_label.Text = "Nieprawidłowa wartość. Wprowadź poprawną nazwę.";
+                id_komunikat_label.Text = "Nieprawidłowa wartość. Wprowadź nieujemną liczbę.";
                 isAllDataCorrect = false;
             }
             if (String.IsNullOrEmpty(nazwa_textBox.Text))
@@ -64,28 +64,28 @@ namespace WindowsFormsApp1
                 nazwa_komunikat_label.Text = "Nieprawidłowa wartość. Wprowadź poprawną nazwę.";
                 isAllDataCorrect = false;
             }
-            if (!int.TryParse(r_textBox.Text, out number))
+            if (!uint.TryParse(r_textBox.Text, out number))
             {
                 r_komunikat_label.Visible = true;
-                r_komunikat_label.Text = "Nieprawidłowa wartość. Wprowadź liczbę.";
+                r_komunikat_label.Text = "Nieprawidłowa wartość. Wprowadź nieujemną liczbę.";
                 isAllDataCorrect = false;
             }
-            if (!int.TryParse(d_textBox.Text, out number))
+            if (!uint.TryParse(d_textBox.Text, out number))
             {
                 d_komunikat_label.Visible = true;
-                d_komunikat_label.Text = "Nieprawidłowa wartość. Wprowadź liczbę.";
+                d_komunikat_label.Text = "Nieprawidłowa wartość. Wprowadź nieujemną liczbę.";
                 isAllDataCorrect = false;
             }
-            if (!int.TryParse(p1_textBox.Text, out number))
+            if (!uint.TryParse(p1_textBox.Text, out number))
             {
                 p1_komunikat_label.Visible = true;
-                p1_komunikat_label.Text = "Nieprawidłowa wartość. Wprowadź liczbę.";
+                p1_komunikat_label.Text = "Nieprawidłowa wartość. Wprowadź nieujemną liczbę.";
                 isAllDataCorrect = false;
             }
-            if (!int.TryParse(p2_textBox.Text, out number))
+            if (!uint.TryParse(p2_textBox.Text, out number))
             {
                 p2_komunikat_label.Visible = true;
-                p2_komunikat_label.Text = "Nieprawidłowa wartość. Wprowadź liczbę.";
+                p2_komunikat_label.Text = "Nieprawidłowa wartość. Wprowadź nieujemną liczbę.";
                 isAllDataCorrect = false; 
             }
             if( mainWindow.IDlist.Contains(int.Parse(id_textbox.Text)))
@@ -95,17 +95,32 @@ namespace WindowsFormsApp1
                 isAllDataCorrect = false;
             }
 
-            if(isAllDataCorrect)
-                if( int.Parse(p1_textBox.Text) < int.Parse(d_textBox.Text) )
+            if (isAllDataCorrect)
+            {
+                if (int.Parse(p1_textBox.Text) < int.Parse(d_textBox.Text))
                 {
                     d_komunikat_label.Visible = true;
                     d_komunikat_label.Text = "Nieprawdilowa wartość (d > p1).";
                     isAllDataCorrect = false;
                 }
+                else if (int.Parse(p1_textBox.Text) > (int.Parse(p2_textBox.Text)+int.Parse(d_textBox.Text)))
+                {
+                    d_komunikat_label.Visible = true;
+                    d_komunikat_label.Text = "Nieprawdilowa wartość (p1 > d+p2).";
+                    isAllDataCorrect = false;
+                }
+                else if (int.Parse(p1_textBox.Text) == 0 & int.Parse(p2_textBox.Text) == 0 )
+                {
+                    d_komunikat_label.Visible = true;
+                    d_komunikat_label.Text = "Nieprawdilowa wartość (p1=p2=0).";
+                    isAllDataCorrect = false;
+                }
+            }
 
             if (isAllDataCorrect)
             {
                 mainWindow.IDlist.Remove(edytowane_id);
+                mainWindow.aplication.removeByID(edytowane_id);
                 mainWindow.IDlist.Add(int.Parse(id_textbox.Text));
                 commWithMainWindow = new string[] {  nazwa_textBox.Text, id_textbox.Text, r_textBox.Text, d_textBox.Text, p1_textBox.Text, p2_textBox.Text };
                 DialogResult = DialogResult.OK;

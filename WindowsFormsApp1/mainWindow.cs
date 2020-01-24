@@ -42,6 +42,7 @@ namespace WindowsFormsApp1
                 int id = int.Parse(eachItem.SubItems[1].Text);
                 IDlist.Remove(id);
                 aplication.removeByID(id);
+
             }
                 
                 
@@ -72,11 +73,12 @@ namespace WindowsFormsApp1
 
             try
             {   // Open the text file using a stream reader.
-                using (StreamReader sr = new StreamReader("./zadania.csv"))
+                using (StreamReader sr = new StreamReader("zadania.csv"))
                 {
                     // Read the stream to a string, and write the string to the console.
                     string line;
-                    int number;
+                    uint number;
+                    int i_number;
                     int nazwa=-1, id=-1, r=-1, d=-1, p1=-1, p2=-1;
                     line = sr.ReadLine();
                     string[] label_line = line.Split(new char[] { ' ', '\t', ';' }, StringSplitOptions.RemoveEmptyEntries);
@@ -119,12 +121,12 @@ namespace WindowsFormsApp1
                         if (line == null)
                             break;
 
-                        string[] line_elems = line.Split(new char[] { ' ', '\t',';' }, StringSplitOptions.RemoveEmptyEntries);
+                        string[] line_elems = line.Split(new char[] { ' ', '\t',';', ','}, StringSplitOptions.RemoveEmptyEntries);
 
 
                         foreach (int i in numericDataIndexes)
                         {
-                            if(!int.TryParse(line_elems[i], out number))
+                            if(!uint.TryParse(line_elems[i], out number))
                             {
                                 importZadan_label.Visible = true;
                                 importZadan_label.Text = "Błąd importu. Nieznane znaki w danych liczbowych.";
@@ -133,8 +135,8 @@ namespace WindowsFormsApp1
                             }
                         }
 
-                        int.TryParse(line_elems[id], out number);
-                        if (IDlist.Contains(number))
+                        int.TryParse(line_elems[id], out i_number);
+                        if (IDlist.Contains(i_number))
                         {
                             importZadan_label.Visible = true;
                             importZadan_label.Text = "Zduplikowane ID.";
@@ -143,12 +145,26 @@ namespace WindowsFormsApp1
                         }
 
                         if(isDataCorrect)
+                        {
                             if (int.Parse(line_elems[d]) > int.Parse(line_elems[p1]))
                             {
                                 importZadan_label.Visible = true;
                                 importZadan_label.Text = "Błędne wartości danych wejściowych (d>p1).";
                                 isDataCorrect = false;
+                            } else if (int.Parse(line_elems[p1]) > (int.Parse(line_elems[p2]) + int.Parse(line_elems[d])))
+                            {
+                                importZadan_label.Visible = true;
+                                importZadan_label.Text = "Błędne wartości danych wejściowych (p1 > d+p2).";
+                                isDataCorrect = false;
                             }
+                            else if (int.Parse(line_elems[p1]) == 0 & int.Parse(line_elems[p2]) == 0)
+                            {
+                                importZadan_label.Visible = true;
+                                importZadan_label.Text = "Błędne wartości danych wejściowych (p1 = p2 = 0).";
+                                isDataCorrect = false;
+                            }
+
+                        }
 
                         if (isDataCorrect)
                         {
@@ -164,6 +180,7 @@ namespace WindowsFormsApp1
             {
                 importZadan_label.Visible = true;
                 importZadan_label.Text = "Błąd przy otwarciu pliku.";
+                isDataCorrect = false;
             }
 
             if(isDataCorrect)
@@ -195,6 +212,8 @@ namespace WindowsFormsApp1
                     {
                         listView1.SelectedItems[0].SubItems[i].Text = dataFromEditWindow[i];
                     }
+                    aplication.addTask(int.Parse(dataFromEditWindow[1]), int.Parse(dataFromEditWindow[2]), int.Parse(dataFromEditWindow[3]), int.Parse(dataFromEditWindow[4]), int.Parse(dataFromEditWindow[5]));
+
                 }
             }
         }

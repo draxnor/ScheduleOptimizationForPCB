@@ -36,11 +36,10 @@ namespace WindowsFormsApp1
         public List<Task> addTask(Task newTask)
         {
             orderOfTasks.Add(new Task(newTask));
-            CompareTask compareTask = new CompareTask();
-            orderOfTasks.Sort(compareTask);
             calculateNewOrder();
             return orderOfTasks;
         }
+
 
         public void removeByID(int id_)
         {
@@ -49,6 +48,7 @@ namespace WindowsFormsApp1
                 if (task.taskId == id_)
                 {
                     orderOfTasks.Remove(task);
+                    calculateNewOrder();
                     break;
                 }
 
@@ -73,6 +73,8 @@ namespace WindowsFormsApp1
         }
         private void calculateNewOrder()
         {
+            CompareTask compareTask = new CompareTask();
+            orderOfTasks.Sort(compareTask);
             List<Task> Subset = new List<Task>();
             foreach (Task task in orderOfTasks)
             {

@@ -35,6 +35,7 @@ namespace WindowsFormsApp1
             br.Add(new SolidBrush(Color.Blue));
             br.Add(new SolidBrush(Color.Gray));
             br.Add(new SolidBrush(Color.Green));
+            Font fontOnJobs = new Font("Arial", 12);
 
             if (mainWindow.aplication.getOrderOfTasks().Count < 1)
             {
@@ -49,14 +50,25 @@ namespace WindowsFormsApp1
             for (int i = 0; i < n; i++)
             {
                 xP1 = x0+(mainWindow.aplication.getOrderOfTasks()[i].timeOfFinishOperationP1 - mainWindow.aplication.getOrderOfTasks()[i].timeP1) * 10;
-                wP1 = mainWindow.aplication.getOrderOfTasks()[i].timeP1 * 30;
+                wP1 = mainWindow.aplication.getOrderOfTasks()[i].timeP1 * 10;
                 yP1 = 0;
                 xP2 = x0 + (mainWindow.aplication.getOrderOfTasks()[i].timeOfFinishOperationP2 - mainWindow.aplication.getOrderOfTasks()[i].timeP2) * 10;
-                wP2 = mainWindow.aplication.getOrderOfTasks()[i].timeP2 * 30;
+                wP2 = mainWindow.aplication.getOrderOfTasks()[i].timeP2 * 10;
                 yP2 = 50;
 
                 G.FillRectangle(br[i % 5], xP1, yP1, wP1, h);
                 G.FillRectangle(br[i % 5], xP2, yP2, wP2, h);
+            }
+
+            x0 = x0 - 5;
+            for (int i = 0; i < n; i++)
+            {
+                xP1 = x0 + mainWindow.aplication.getOrderOfTasks()[i].timeOfFinishOperationP1 * 10 - mainWindow.aplication.getOrderOfTasks()[i].timeP1 * 5;
+                yP1 = 5;
+                xP2 = x0 + mainWindow.aplication.getOrderOfTasks()[i].timeOfFinishOperationP2 * 10 - mainWindow.aplication.getOrderOfTasks()[i].timeP2 * 5;
+                yP2 = 55;
+                G.DrawString(mainWindow.aplication.getOrderOfTasks()[i].taskId.ToString(), fontOnJobs, Brushes.Black, new PointF(xP1,yP1));
+                G.DrawString(mainWindow.aplication.getOrderOfTasks()[i].taskId.ToString(), fontOnJobs, Brushes.Black, new PointF(xP2, yP2));
             }
             Font myFont = new Font("Arial", 14);
             G.DrawString("SMD", myFont, Brushes.Black, new PointF(2, 0));
@@ -68,6 +80,11 @@ namespace WindowsFormsApp1
         private void zamknij_button_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
