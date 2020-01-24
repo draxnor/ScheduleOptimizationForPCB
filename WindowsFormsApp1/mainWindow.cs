@@ -72,108 +72,124 @@ namespace WindowsFormsApp1
             bool isDataCorrect = true;
 
             try
-            {   // Open the text file using a stream reader.
-                using (StreamReader sr = new StreamReader("zadania.csv"))
+            {
+                var filePath = string.Empty;
+
+                using (OpenFileDialog openFileDialog = new OpenFileDialog())
                 {
-                    // Read the stream to a string, and write the string to the console.
-                    string line;
-                    uint number;
-                    int i_number;
-                    int nazwa=-1, id=-1, r=-1, d=-1, p1=-1, p2=-1;
-                    line = sr.ReadLine();
-                    string[] label_line = line.Split(new char[] { ' ', '\t', ';' }, StringSplitOptions.RemoveEmptyEntries);
-                    for (int i=0; i<label_line.Length; ++i)
+                    openFileDialog.InitialDirectory = "c:\\";
+                    openFileDialog.Filter = "txt files (*.txt)|*.txt|csv files (*.csv)|*.csv";
+                    openFileDialog.FilterIndex = 2;
+                    openFileDialog.RestoreDirectory = true;
+
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
                     {
-                        switch (label_line[i])
+                        filePath = openFileDialog.FileName;
+                        var fileStream = openFileDialog.OpenFile();
+
+                        using (StreamReader sr = new StreamReader(fileStream))
                         {
-                            case "nazwa":
-                                nazwa = i;
-                                break;
-                            case "id":
-                                id = i;
-                                break;
-                            case "r":
-                                r = i;
-                                break;
-                            case "d":
-                                d = i;
-                                break;
-                            case "p1":
-                                p1 = i;
-                                break;
-                            case "p2":
-                                p2 = i;
-                                break;
+                            string line;
+                            uint number;
+                            int i_number;
+                            int nazwa = -1, id = -1, r = -1, d = -1, p1 = -1, p2 = -1;
+                            line = sr.ReadLine();
+                            string[] label_line = line.Split(new char[] { ' ', '\t', ';' }, StringSplitOptions.RemoveEmptyEntries);
+                            for (int i = 0; i < label_line.Length; ++i)
+                            {
+                                switch (label_line[i])
+                                {
+                                    case "nazwa":
+                                        nazwa = i;
+                                        break;
+                                    case "id":
+                                        id = i;
+                                        break;
+                                    case "r":
+                                        r = i;
+                                        break;
+                                    case "d":
+                                        d = i;
+                                        break;
+                                    case "p1":
+                                        p1 = i;
+                                        break;
+                                    case "p2":
+                                        p2 = i;
+                                        break;
+                                }
+                            }
+                            if (nazwa < 0 | id < 0 | r < 0 | d < 0 | p1 < 0 | p2 < 0)
+                            {
+                                importZadan_label.Visible = true;
+                                importZadan_label.Text = "Błędny format danych w pliku - etykiety kolumn.";
+                                isDataCorrect = false;
+                                return;
+                            }
+                            int[] numericDataIndexes = { id, r, d, p1, p2 };
+
+                            do
+                            {
+                                line = sr.ReadLine();
+                                if (line == null)
+                                    break;
+
+                                string[] line_elems = line.Split(new char[] { ' ', '\t', ';', ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+
+                                foreach (int i in numericDataIndexes)
+                                {
+                                    if (!uint.TryParse(line_elems[i], out number))
+                                    {
+                                        importZadan_label.Visible = true;
+                                        importZadan_label.Text = "Błąd importu. Nieznane znaki w danych liczbowych.";
+                                        isDataCorrect = false;
+                                        break;
+                                    }
+                                }
+
+                                int.TryParse(line_elems[id], out i_number);
+                                if (IDlist.Contains(i_number))
+                                {
+                                    importZadan_label.Visible = true;
+                                    importZadan_label.Text = "Zduplikowane ID.";
+                                    isDataCorrect = false;
+                                    break;
+                                }
+
+                                if (isDataCorrect)
+                                {
+                                    if (int.Parse(line_elems[d]) > int.Parse(line_elems[p1]))
+                                    {
+                                        importZadan_label.Visible = true;
+                                        importZadan_label.Text = "Błędne wartości danych wejściowych (d>p1).";
+                                        isDataCorrect = false;
+                                    }
+                                    else if (int.Parse(line_elems[p1]) > (int.Parse(line_elems[p2]) + int.Parse(line_elems[d])))
+                                    {
+                                        importZadan_label.Visible = true;
+                                        importZadan_label.Text = "Błędne wartości danych wejściowych (p1 > d+p2).";
+                                        isDataCorrect = false;
+                                    }
+                                    else if (int.Parse(line_elems[p1]) == 0 & int.Parse(line_elems[p2]) == 0)
+                                    {
+                                        importZadan_label.Visible = true;
+                                        importZadan_label.Text = "Błędne wartości danych wejściowych (p1 = p2 = 0).";
+                                        isDataCorrect = false;
+                                    }
+
+                                }
+
+                                if (isDataCorrect)
+                                {
+                                    string[] itemAsStringTab = { line_elems[nazwa], line_elems[id], line_elems[r], line_elems[d], line_elems[p1], line_elems[p2] };
+                                    listOfLVItems.Add(new ListViewItem(itemAsStringTab));
+                                    listOfTasks.Add(new Task(int.Parse(line_elems[id]), int.Parse(line_elems[r]), int.Parse(line_elems[d]), int.Parse(line_elems[p1]), int.Parse(line_elems[p2])));
+                                }
+
+                            } while (line != null & isDataCorrect);
                         }
                     }
-                    if (nazwa < 0 | id < 0 | r < 0 | d < 0 | p1 < 0 | p2 < 0)
-                    {
-                        importZadan_label.Visible = true;
-                        importZadan_label.Text = "Błędny format danych w pliku - etykiety kolumn.";
-                        isDataCorrect = false;
-                        return;
-                    }
-                    int[] numericDataIndexes = { id, r, d, p1, p2 };
-
-                    do
-                    {
-                        line = sr.ReadLine();
-                        if (line == null)
-                            break;
-
-                        string[] line_elems = line.Split(new char[] { ' ', '\t',';', ','}, StringSplitOptions.RemoveEmptyEntries);
-
-
-                        foreach (int i in numericDataIndexes)
-                        {
-                            if(!uint.TryParse(line_elems[i], out number))
-                            {
-                                importZadan_label.Visible = true;
-                                importZadan_label.Text = "Błąd importu. Nieznane znaki w danych liczbowych.";
-                                isDataCorrect = false;
-                                break;
-                            }
-                        }
-
-                        int.TryParse(line_elems[id], out i_number);
-                        if (IDlist.Contains(i_number))
-                        {
-                            importZadan_label.Visible = true;
-                            importZadan_label.Text = "Zduplikowane ID.";
-                            isDataCorrect = false;
-                            break;
-                        }
-
-                        if(isDataCorrect)
-                        {
-                            if (int.Parse(line_elems[d]) > int.Parse(line_elems[p1]))
-                            {
-                                importZadan_label.Visible = true;
-                                importZadan_label.Text = "Błędne wartości danych wejściowych (d>p1).";
-                                isDataCorrect = false;
-                            } else if (int.Parse(line_elems[p1]) > (int.Parse(line_elems[p2]) + int.Parse(line_elems[d])))
-                            {
-                                importZadan_label.Visible = true;
-                                importZadan_label.Text = "Błędne wartości danych wejściowych (p1 > d+p2).";
-                                isDataCorrect = false;
-                            }
-                            else if (int.Parse(line_elems[p1]) == 0 & int.Parse(line_elems[p2]) == 0)
-                            {
-                                importZadan_label.Visible = true;
-                                importZadan_label.Text = "Błędne wartości danych wejściowych (p1 = p2 = 0).";
-                                isDataCorrect = false;
-                            }
-
-                        }
-
-                        if (isDataCorrect)
-                        {
-                            string[] itemAsStringTab = { line_elems[nazwa], line_elems[id], line_elems[r], line_elems[d], line_elems[p1], line_elems[p2] };
-                            listOfLVItems.Add(new ListViewItem(itemAsStringTab));
-                            listOfTasks.Add(new Task(int.Parse(line_elems[id]), int.Parse(line_elems[r]), int.Parse(line_elems[d]), int.Parse(line_elems[p1]), int.Parse(line_elems[p2])));
-                        }
-                       
-                    } while (line != null & isDataCorrect);
                 }
             }
             catch (IOException exeption)
