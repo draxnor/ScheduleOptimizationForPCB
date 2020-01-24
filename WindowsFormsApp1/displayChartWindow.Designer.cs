@@ -37,7 +37,7 @@
             // 
             // zamknij_button
             // 
-            this.zamknij_button.Location = new System.Drawing.Point(1319, 255);
+            this.zamknij_button.Location = new System.Drawing.Point(838, 260);
             this.zamknij_button.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.zamknij_button.Name = "zamknij_button";
             this.zamknij_button.Size = new System.Drawing.Size(186, 66);
@@ -53,7 +53,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(18, 18);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1487, 207);
+            this.pictureBox1.Size = new System.Drawing.Size(2242, 227);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
@@ -82,7 +82,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1527, 352);
+            this.ClientSize = new System.Drawing.Size(1061, 337);
             this.Controls.Add(this.cmax_textbox);
             this.Controls.Add(this.Cmax_label);
             this.Controls.Add(this.pictureBox1);
