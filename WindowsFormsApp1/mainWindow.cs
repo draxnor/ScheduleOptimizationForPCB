@@ -266,5 +266,10 @@ namespace WindowsFormsApp1
 
         static public List<int> IDlist = new List<int>();
         static public Aplication aplication = new Aplication();
+
+        private void wyswietlPlanPracy_button_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

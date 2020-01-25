@@ -42,6 +42,7 @@
             this.usunWszystkieZadaniaButton = new System.Windows.Forms.Button();
             this.edytujZadanieButton = new System.Windows.Forms.Button();
             this.importZadan_label = new System.Windows.Forms.Label();
+            this.wyswietlPlanPracy_button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // dodajZadanieButton
@@ -119,7 +120,7 @@
             // 
             // wyswietlHarmonogramButton
             // 
-            this.wyswietlHarmonogramButton.Location = new System.Drawing.Point(31, 290);
+            this.wyswietlHarmonogramButton.Location = new System.Drawing.Point(31, 257);
             this.wyswietlHarmonogramButton.Name = "wyswietlHarmonogramButton";
             this.wyswietlHarmonogramButton.Size = new System.Drawing.Size(272, 52);
             this.wyswietlHarmonogramButton.TabIndex = 3;
@@ -168,11 +169,23 @@
             this.importZadan_label.Size = new System.Drawing.Size(0, 13);
             this.importZadan_label.TabIndex = 7;
             // 
-            // Form1
+            // wyswietlPlanPracy_button
+            // 
+            this.wyswietlPlanPracy_button.Location = new System.Drawing.Point(31, 329);
+            this.wyswietlPlanPracy_button.Name = "wyswietlPlanPracy_button";
+            this.wyswietlPlanPracy_button.Size = new System.Drawing.Size(272, 52);
+            this.wyswietlPlanPracy_button.TabIndex = 8;
+            this.wyswietlPlanPracy_button.Text = "Wyświetl plan pracy";
+            this.wyswietlPlanPracy_button.UseVisualStyleBackColor = true;
+            this.wyswietlPlanPracy_button.Visible = false;
+            this.wyswietlPlanPracy_button.Click += new System.EventHandler(this.wyswietlPlanPracy_button_Click);
+            // 
+            // mainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1050, 408);
+            this.Controls.Add(this.wyswietlPlanPracy_button);
             this.Controls.Add(this.importZadan_label);
             this.Controls.Add(this.edytujZadanieButton);
             this.Controls.Add(this.usunWszystkieZadaniaButton);
@@ -181,7 +194,7 @@
             this.Controls.Add(this.usunZadanieButton);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.dodajZadanieButton);
-            this.Name = "Form1";
+            this.Name = "mainWindow";
             this.Text = "Szybki Projekt Na Optymalizacje";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
@@ -205,6 +218,7 @@
         private System.Windows.Forms.ColumnHeader cHczasTHT;
         private System.Windows.Forms.Label importZadan_label;
         private System.Windows.Forms.ColumnHeader cHid;
+        private System.Windows.Forms.Button wyswietlPlanPracy_button;
     }
 }
 
