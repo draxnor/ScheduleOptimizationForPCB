@@ -42,7 +42,7 @@
             this.usunWszystkieZadaniaButton = new System.Windows.Forms.Button();
             this.edytujZadanieButton = new System.Windows.Forms.Button();
             this.importZadan_label = new System.Windows.Forms.Label();
-            this.wyswietlPlanPracy_button = new System.Windows.Forms.Button();
+            this.wyswietlPlanPracyButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // dodajZadanieButton
@@ -71,7 +71,7 @@
             this.listView1.LabelWrap = false;
             this.listView1.Location = new System.Drawing.Point(345, 3);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(707, 401);
+            this.listView1.Size = new System.Drawing.Size(779, 401);
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -81,7 +81,7 @@
             // 
             this.cHnazwaZadania.Tag = "";
             this.cHnazwaZadania.Text = "Nazwa zadania";
-            this.cHnazwaZadania.Width = 86;
+            this.cHnazwaZadania.Width = 150;
             // 
             // cHid
             // 
@@ -105,7 +105,7 @@
             // cHczasTHT
             // 
             this.cHczasTHT.Text = "Czas realizacji montażu THT";
-            this.cHczasTHT.Width = 150;
+            this.cHczasTHT.Width = 160;
             // 
             // usunZadanieButton
             // 
@@ -169,23 +169,23 @@
             this.importZadan_label.Size = new System.Drawing.Size(0, 13);
             this.importZadan_label.TabIndex = 7;
             // 
-            // wyswietlPlanPracy_button
+            // wyswietlPlanPracyButton
             // 
-            this.wyswietlPlanPracy_button.Location = new System.Drawing.Point(31, 329);
-            this.wyswietlPlanPracy_button.Name = "wyswietlPlanPracy_button";
-            this.wyswietlPlanPracy_button.Size = new System.Drawing.Size(272, 52);
-            this.wyswietlPlanPracy_button.TabIndex = 8;
-            this.wyswietlPlanPracy_button.Text = "Wyświetl plan pracy";
-            this.wyswietlPlanPracy_button.UseVisualStyleBackColor = true;
-            this.wyswietlPlanPracy_button.Visible = false;
-            this.wyswietlPlanPracy_button.Click += new System.EventHandler(this.wyswietlPlanPracy_button_Click);
+            this.wyswietlPlanPracyButton.Location = new System.Drawing.Point(31, 329);
+            this.wyswietlPlanPracyButton.Name = "wyswietlPlanPracyButton";
+            this.wyswietlPlanPracyButton.Size = new System.Drawing.Size(272, 52);
+            this.wyswietlPlanPracyButton.TabIndex = 8;
+            this.wyswietlPlanPracyButton.Text = "Wyświetl plan pracy";
+            this.wyswietlPlanPracyButton.UseVisualStyleBackColor = true;
+            this.wyswietlPlanPracyButton.Visible = false;
+            this.wyswietlPlanPracyButton.Click += new System.EventHandler(this.wyswietlPlanPracyButton_Click);
             // 
             // mainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1050, 408);
-            this.Controls.Add(this.wyswietlPlanPracy_button);
+            this.ClientSize = new System.Drawing.Size(1129, 410);
+            this.Controls.Add(this.wyswietlPlanPracyButton);
             this.Controls.Add(this.importZadan_label);
             this.Controls.Add(this.edytujZadanieButton);
             this.Controls.Add(this.usunWszystkieZadaniaButton);
@@ -218,7 +218,7 @@
         private System.Windows.Forms.ColumnHeader cHczasTHT;
         private System.Windows.Forms.Label importZadan_label;
         private System.Windows.Forms.ColumnHeader cHid;
-        private System.Windows.Forms.Button wyswietlPlanPracy_button;
+        private System.Windows.Forms.Button wyswietlPlanPracyButton;
     }
 }
 

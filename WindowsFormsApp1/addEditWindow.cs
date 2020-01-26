@@ -88,16 +88,17 @@ namespace WindowsFormsApp1
                 p2_komunikat_label.Text = "Nieprawidłowa wartość. Wprowadź nieujemną liczbę.";
                 isAllDataCorrect = false; 
             }
-            if( mainWindow.IDlist.Contains(int.Parse(id_textbox.Text)))
-            {
-                id_komunikat_label.Visible = true;
-                id_komunikat_label.Text = "Zduplikowane ID. Wprowadź unikalne.";
-                isAllDataCorrect = false;
-            }
+            
 
             if (isAllDataCorrect)
             {
-                if (int.Parse(p1_textBox.Text) < int.Parse(d_textBox.Text))
+                if (mainWindow.zadaniaDictionary.ContainsKey(int.Parse(id_textbox.Text)))
+                {
+                    id_komunikat_label.Visible = true;
+                    id_komunikat_label.Text = "Zduplikowane ID. Wprowadź unikalne.";
+                    isAllDataCorrect = false;
+                }
+                    if (int.Parse(p1_textBox.Text) < int.Parse(d_textBox.Text))
                 {
                     d_komunikat_label.Visible = true;
                     d_komunikat_label.Text = "Nieprawdilowa wartość (d > p1).";
@@ -119,9 +120,9 @@ namespace WindowsFormsApp1
 
             if (isAllDataCorrect)
             {
-                mainWindow.IDlist.Remove(edytowane_id);
+                mainWindow.zadaniaDictionary.Remove(edytowane_id);
                 mainWindow.aplication.removeByID(edytowane_id);
-                mainWindow.IDlist.Add(int.Parse(id_textbox.Text));
+                mainWindow.zadaniaDictionary.Add(int.Parse(id_textbox.Text), nazwa_textBox.Text);
                 commWithMainWindow = new string[] {  nazwa_textBox.Text, id_textbox.Text, r_textBox.Text, d_textBox.Text, p1_textBox.Text, p2_textBox.Text };
                 DialogResult = DialogResult.OK;
                 this.Close();

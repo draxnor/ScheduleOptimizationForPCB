@@ -28,8 +28,7 @@ namespace WindowsFormsApp1
                     
                     usunWszystkieZadaniaButton.Visible = true;
                     wyswietlHarmonogramButton.Visible = true;
-
-                }
+                    wyswietlPlanPracyButton.Visible = true;                }
             }
 
         }
@@ -40,7 +39,7 @@ namespace WindowsFormsApp1
             {
                 listView1.Items.Remove(eachItem);
                 int id = int.Parse(eachItem.SubItems[1].Text);
-                IDlist.Remove(id);
+                zadaniaDictionary.Remove(id);
                 aplication.removeByID(id);
 
             }
@@ -50,6 +49,7 @@ namespace WindowsFormsApp1
             {
                 usunWszystkieZadaniaButton.Visible = false;
                 wyswietlHarmonogramButton.Visible = false;
+                wyswietlPlanPracyButton.Visible = false;
             }
                 
 
@@ -87,14 +87,14 @@ namespace WindowsFormsApp1
                         filePath = openFileDialog.FileName;
                         var fileStream = openFileDialog.OpenFile();
 
-                        using (StreamReader sr = new StreamReader(fileStream))
+                        using (StreamReader sr = new StreamReader(fileStream, System.Text.Encoding.Default))
                         {
                             string line;
                             uint number;
                             int i_number;
                             int nazwa = -1, id = -1, r = -1, d = -1, p1 = -1, p2 = -1;
                             line = sr.ReadLine();
-                            string[] label_line = line.Split(new char[] { ' ', '\t', ';' }, StringSplitOptions.RemoveEmptyEntries);
+                            string[] label_line = line.Split(new char[] { '\t', ';',',' }, StringSplitOptions.RemoveEmptyEntries);
                             for (int i = 0; i < label_line.Length; ++i)
                             {
                                 switch (label_line[i])
@@ -134,7 +134,7 @@ namespace WindowsFormsApp1
                                 if (line == null)
                                     break;
 
-                                string[] line_elems = line.Split(new char[] { ' ', '\t', ';', ',' }, StringSplitOptions.RemoveEmptyEntries);
+                                string[] line_elems = line.Split(new char[] { '\t', ';', ',' }, StringSplitOptions.RemoveEmptyEntries);
 
 
                                 foreach (int i in numericDataIndexes)
@@ -149,7 +149,7 @@ namespace WindowsFormsApp1
                                 }
 
                                 int.TryParse(line_elems[id], out i_number);
-                                if (IDlist.Contains(i_number))
+                                if (zadaniaDictionary.ContainsKey(i_number))
                                 {
                                     importZadan_label.Visible = true;
                                     importZadan_label.Text = "Zduplikowane ID.";
@@ -192,7 +192,7 @@ namespace WindowsFormsApp1
                     }
                 }
             }
-            catch (IOException exeption)
+            catch (IOException)
             {
                 importZadan_label.Visible = true;
                 importZadan_label.Text = "Błąd przy otwarciu pliku.";
@@ -202,14 +202,18 @@ namespace WindowsFormsApp1
             if(isDataCorrect)
             {
                 foreach( ListViewItem item in listOfLVItems)
+                {
                     listView1.Items.Add(item);
+                    zadaniaDictionary.Add(int.Parse(item.SubItems[1].Text), item.SubItems[0].Text);
+                }
+                    
                 foreach(Task item in listOfTasks)
                 {
                     aplication.addTask(item);
-                    IDlist.Add(item.taskId);
                 }
                 usunWszystkieZadaniaButton.Visible = true;
                 wyswietlHarmonogramButton.Visible = true;
+                wyswietlPlanPracyButton.Visible = true;
             }
 
 
@@ -253,10 +257,11 @@ namespace WindowsFormsApp1
         private void usunWszystkieZadaniaButton_Click(object sender, EventArgs e)
         {
             listView1.Items.Clear();
-            IDlist.Clear();
+            zadaniaDictionary.Clear();
             aplication.clearOrderOfTask();
             usunWszystkieZadaniaButton.Visible = false;
             wyswietlHarmonogramButton.Visible = false;
+            wyswietlPlanPracyButton.Visible = false;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -264,12 +269,16 @@ namespace WindowsFormsApp1
             importZadan_label.Visible = false;
         }
 
-        static public List<int> IDlist = new List<int>();
+        private void wyswietlPlanPracyButton_Click(object sender, EventArgs e)
+        {
+            showWorkPlanWindow workPlanWindow = new showWorkPlanWindow();
+            workPlanWindow.ShowDialog();
+        }
+
+
+        static public Dictionary<int, string> zadaniaDictionary = new Dictionary<int, string>();
         static public Aplication aplication = new Aplication();
 
-        private void wyswietlPlanPracy_button_Click(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }
