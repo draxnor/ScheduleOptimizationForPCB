@@ -77,7 +77,7 @@ namespace WindowsFormsApp1
 
                 using (OpenFileDialog openFileDialog = new OpenFileDialog())
                 {
-                    openFileDialog.InitialDirectory = "c:\\";
+                    openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                     openFileDialog.Filter = "txt files (*.txt)|*.txt|csv files (*.csv)|*.csv";
                     openFileDialog.FilterIndex = 2;
                     openFileDialog.RestoreDirectory = true;
@@ -94,7 +94,7 @@ namespace WindowsFormsApp1
                             int i_number;
                             int nazwa = -1, id = -1, r = -1, d = -1, p1 = -1, p2 = -1;
                             line = sr.ReadLine();
-                            string[] label_line = line.Split(new char[] { '\t', ';',',' }, StringSplitOptions.RemoveEmptyEntries);
+                            string[] label_line = line.Split(new char[] { '\t', ';', ',' }, StringSplitOptions.RemoveEmptyEntries);
                             for (int i = 0; i < label_line.Length; ++i)
                             {
                                 switch (label_line[i])
@@ -189,6 +189,14 @@ namespace WindowsFormsApp1
 
                             } while (line != null & isDataCorrect);
                         }
+                    }
+                    else
+                    {
+                        Console.WriteLine(filePath);
+                        importZadan_label.Visible = true;
+                        importZadan_label.Text = "Nie wybrano pliku.";
+                        isDataCorrect = false;
+                        return;
                     }
                 }
             }

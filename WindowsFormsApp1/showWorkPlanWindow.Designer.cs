@@ -51,9 +51,10 @@
             // 
             // planZamowien_button
             // 
-            this.planZamowien_button.Location = new System.Drawing.Point(12, 12);
+            this.planZamowien_button.Location = new System.Drawing.Point(18, 18);
+            this.planZamowien_button.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.planZamowien_button.Name = "planZamowien_button";
-            this.planZamowien_button.Size = new System.Drawing.Size(133, 50);
+            this.planZamowien_button.Size = new System.Drawing.Size(200, 77);
             this.planZamowien_button.TabIndex = 0;
             this.planZamowien_button.Text = "Plan zamówień materiałów";
             this.planZamowien_button.UseVisualStyleBackColor = true;
@@ -61,9 +62,10 @@
             // 
             // planPracySMD_button
             // 
-            this.planPracySMD_button.Location = new System.Drawing.Point(12, 83);
+            this.planPracySMD_button.Location = new System.Drawing.Point(18, 128);
+            this.planPracySMD_button.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.planPracySMD_button.Name = "planPracySMD_button";
-            this.planPracySMD_button.Size = new System.Drawing.Size(133, 50);
+            this.planPracySMD_button.Size = new System.Drawing.Size(200, 77);
             this.planPracySMD_button.TabIndex = 1;
             this.planPracySMD_button.Text = "Plan pracy linii SMD";
             this.planPracySMD_button.UseVisualStyleBackColor = true;
@@ -71,9 +73,10 @@
             // 
             // planPracyTHT_button
             // 
-            this.planPracyTHT_button.Location = new System.Drawing.Point(12, 152);
+            this.planPracyTHT_button.Location = new System.Drawing.Point(18, 234);
+            this.planPracyTHT_button.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.planPracyTHT_button.Name = "planPracyTHT_button";
-            this.planPracyTHT_button.Size = new System.Drawing.Size(133, 48);
+            this.planPracyTHT_button.Size = new System.Drawing.Size(200, 74);
             this.planPracyTHT_button.TabIndex = 2;
             this.planPracyTHT_button.Text = "Plan pracy monterów THT";
             this.planPracyTHT_button.UseVisualStyleBackColor = true;
@@ -81,9 +84,10 @@
             // 
             // zamknij_button
             // 
-            this.zamknij_button.Location = new System.Drawing.Point(12, 291);
+            this.zamknij_button.Location = new System.Drawing.Point(18, 448);
+            this.zamknij_button.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.zamknij_button.Name = "zamknij_button";
-            this.zamknij_button.Size = new System.Drawing.Size(133, 48);
+            this.zamknij_button.Size = new System.Drawing.Size(200, 74);
             this.zamknij_button.TabIndex = 3;
             this.zamknij_button.Text = "Zamknij";
             this.zamknij_button.UseVisualStyleBackColor = true;
@@ -97,9 +101,10 @@
             this.zamowieniaLV_maxCzasRozpoczecia,
             this.zamowieniaLV_czasTrwaniaZamawiania});
             this.planZamowienListView.HideSelection = false;
-            this.planZamowienListView.Location = new System.Drawing.Point(169, 13);
+            this.planZamowienListView.Location = new System.Drawing.Point(254, 20);
+            this.planZamowienListView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.planZamowienListView.Name = "planZamowienListView";
-            this.planZamowienListView.Size = new System.Drawing.Size(643, 336);
+            this.planZamowienListView.Size = new System.Drawing.Size(962, 515);
             this.planZamowienListView.TabIndex = 4;
             this.planZamowienListView.UseCompatibleStateImageBehavior = false;
             this.planZamowienListView.View = System.Windows.Forms.View.Details;
@@ -132,9 +137,10 @@
             this.smdLV_terminRozpoczecia,
             this.smdLV_terminZakonczenia});
             this.planPracySMDListView.HideSelection = false;
-            this.planPracySMDListView.Location = new System.Drawing.Point(169, 12);
+            this.planPracySMDListView.Location = new System.Drawing.Point(254, 18);
+            this.planPracySMDListView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.planPracySMDListView.Name = "planPracySMDListView";
-            this.planPracySMDListView.Size = new System.Drawing.Size(643, 336);
+            this.planPracySMDListView.Size = new System.Drawing.Size(962, 515);
             this.planPracySMDListView.TabIndex = 5;
             this.planPracySMDListView.UseCompatibleStateImageBehavior = false;
             this.planPracySMDListView.View = System.Windows.Forms.View.Details;
@@ -168,9 +174,10 @@
             this.thtLV_terminZakonczenia});
             this.planPracyTHTListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.planPracyTHTListView.HideSelection = false;
-            this.planPracyTHTListView.Location = new System.Drawing.Point(169, 13);
+            this.planPracyTHTListView.Location = new System.Drawing.Point(254, 20);
+            this.planPracyTHTListView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.planPracyTHTListView.Name = "planPracyTHTListView";
-            this.planPracyTHTListView.Size = new System.Drawing.Size(643, 337);
+            this.planPracyTHTListView.Size = new System.Drawing.Size(962, 516);
             this.planPracyTHTListView.TabIndex = 6;
             this.planPracyTHTListView.UseCompatibleStateImageBehavior = false;
             this.planPracyTHTListView.View = System.Windows.Forms.View.Details;
@@ -197,9 +204,9 @@
             // 
             // showWorkPlanWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(824, 361);
+            this.ClientSize = new System.Drawing.Size(1228, 529);
             this.Controls.Add(this.planPracyTHTListView);
             this.Controls.Add(this.planPracySMDListView);
             this.Controls.Add(this.planZamowienListView);
@@ -207,7 +214,8 @@
             this.Controls.Add(this.planPracyTHT_button);
             this.Controls.Add(this.planPracySMD_button);
             this.Controls.Add(this.planZamowien_button);
-            this.MaximumSize = new System.Drawing.Size(840, 400);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MaximumSize = new System.Drawing.Size(1250, 585);
             this.Name = "showWorkPlanWindow";
             this.Text = "wyswietlPlanPracy";
             this.ResumeLayout(false);

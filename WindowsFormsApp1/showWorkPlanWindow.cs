@@ -18,10 +18,13 @@ namespace WindowsFormsApp1
 
             foreach (Task task in mainWindow.aplication.getOrderOfTasks())
             {
-                int startTime = task.timeOfFinishOperationP2 - task.timeP2;
-                string[] newLVitemAsString = { mainWindow.zadaniaDictionary[task.taskId], task.taskId.ToString(), startTime.ToString(), task.timeOfFinishOperationP2.ToString() };
-                ListViewItem newLVItem = new ListViewItem(newLVitemAsString);
-                planPracyTHTListView.Items.Add(newLVItem);
+                if(task.timeP2 != 0)
+                {
+                    int startTime = task.timeOfFinishOperationP2 - task.timeP2;
+                    string[] newLVitemAsString = { mainWindow.zadaniaDictionary[task.taskId], task.taskId.ToString(), startTime.ToString(), task.timeOfFinishOperationP2.ToString() };
+                    ListViewItem newLVItem = new ListViewItem(newLVitemAsString);
+                    planPracyTHTListView.Items.Add(newLVItem);
+                }
             }
 
             List<KeyValuePair<int, int>> taskIDListByMaxTime = new List<KeyValuePair<int, int>>();
@@ -45,10 +48,13 @@ namespace WindowsFormsApp1
 
             foreach (Task task in mainWindow.aplication.getOrderOfTasks())
             {
-                int startTime = task.timeOfFinishOperationP1 - task.timeP1;
-                string[] newLVitemAsString = { mainWindow.zadaniaDictionary[task.taskId], task.taskId.ToString(), startTime.ToString(), task.timeOfFinishOperationP1.ToString() };
-                ListViewItem newLVItem = new ListViewItem(newLVitemAsString);
-                planPracySMDListView.Items.Add(newLVItem);
+                if(task.timeP1 != 0)
+                {
+                    int startTime = task.timeOfFinishOperationP1 - task.timeP1;
+                    string[] newLVitemAsString = { mainWindow.zadaniaDictionary[task.taskId], task.taskId.ToString(), startTime.ToString(), task.timeOfFinishOperationP1.ToString() };
+                    ListViewItem newLVItem = new ListViewItem(newLVitemAsString);
+                    planPracySMDListView.Items.Add(newLVItem);
+                }
             }
         }
 
