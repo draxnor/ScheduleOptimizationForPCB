@@ -276,7 +276,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximumSize = new System.Drawing.Size(930, 560);
             this.Name = "addEditWindow";
-            this.Text = "Form2";
+            this.Text = "Manualne wprowadzanie danych";
             this.Load += new System.EventHandler(this.Form2_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

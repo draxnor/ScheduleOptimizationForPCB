@@ -89,7 +89,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximumSize = new System.Drawing.Size(2200, 395);
             this.Name = "displayChartWindow";
-            this.Text = "Form3";
+            this.Text = "Harmonogram realizacji zadań - diagram Gantta";
             this.Load += new System.EventHandler(this.Form3_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

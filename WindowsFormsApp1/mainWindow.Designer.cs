@@ -47,9 +47,10 @@
             // 
             // dodajZadanieButton
             // 
-            this.dodajZadanieButton.Location = new System.Drawing.Point(31, 41);
+            this.dodajZadanieButton.Location = new System.Drawing.Point(46, 63);
+            this.dodajZadanieButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dodajZadanieButton.Name = "dodajZadanieButton";
-            this.dodajZadanieButton.Size = new System.Drawing.Size(126, 48);
+            this.dodajZadanieButton.Size = new System.Drawing.Size(189, 74);
             this.dodajZadanieButton.TabIndex = 0;
             this.dodajZadanieButton.Text = "Dodaj zadanie";
             this.dodajZadanieButton.UseVisualStyleBackColor = true;
@@ -69,9 +70,10 @@
             this.listView1.HideSelection = false;
             this.listView1.LabelEdit = true;
             this.listView1.LabelWrap = false;
-            this.listView1.Location = new System.Drawing.Point(345, 3);
+            this.listView1.Location = new System.Drawing.Point(518, 5);
+            this.listView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(779, 401);
+            this.listView1.Size = new System.Drawing.Size(1166, 615);
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -109,9 +111,10 @@
             // 
             // usunZadanieButton
             // 
-            this.usunZadanieButton.Location = new System.Drawing.Point(175, 113);
+            this.usunZadanieButton.Location = new System.Drawing.Point(262, 174);
+            this.usunZadanieButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.usunZadanieButton.Name = "usunZadanieButton";
-            this.usunZadanieButton.Size = new System.Drawing.Size(128, 48);
+            this.usunZadanieButton.Size = new System.Drawing.Size(192, 74);
             this.usunZadanieButton.TabIndex = 2;
             this.usunZadanieButton.Text = "Usuń zadanie";
             this.usunZadanieButton.UseVisualStyleBackColor = true;
@@ -120,9 +123,10 @@
             // 
             // wyswietlHarmonogramButton
             // 
-            this.wyswietlHarmonogramButton.Location = new System.Drawing.Point(31, 257);
+            this.wyswietlHarmonogramButton.Location = new System.Drawing.Point(46, 395);
+            this.wyswietlHarmonogramButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.wyswietlHarmonogramButton.Name = "wyswietlHarmonogramButton";
-            this.wyswietlHarmonogramButton.Size = new System.Drawing.Size(272, 52);
+            this.wyswietlHarmonogramButton.Size = new System.Drawing.Size(408, 80);
             this.wyswietlHarmonogramButton.TabIndex = 3;
             this.wyswietlHarmonogramButton.Text = "Wyświetl harmonogram";
             this.wyswietlHarmonogramButton.UseVisualStyleBackColor = true;
@@ -131,9 +135,10 @@
             // 
             // dodajZadaniaZPlikuButton
             // 
-            this.dodajZadaniaZPlikuButton.Location = new System.Drawing.Point(31, 187);
+            this.dodajZadaniaZPlikuButton.Location = new System.Drawing.Point(46, 288);
+            this.dodajZadaniaZPlikuButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dodajZadaniaZPlikuButton.Name = "dodajZadaniaZPlikuButton";
-            this.dodajZadaniaZPlikuButton.Size = new System.Drawing.Size(126, 48);
+            this.dodajZadaniaZPlikuButton.Size = new System.Drawing.Size(189, 74);
             this.dodajZadaniaZPlikuButton.TabIndex = 4;
             this.dodajZadaniaZPlikuButton.Text = "Dodaj zadania z pliku";
             this.dodajZadaniaZPlikuButton.UseVisualStyleBackColor = true;
@@ -141,9 +146,10 @@
             // 
             // usunWszystkieZadaniaButton
             // 
-            this.usunWszystkieZadaniaButton.Location = new System.Drawing.Point(31, 113);
+            this.usunWszystkieZadaniaButton.Location = new System.Drawing.Point(46, 174);
+            this.usunWszystkieZadaniaButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.usunWszystkieZadaniaButton.Name = "usunWszystkieZadaniaButton";
-            this.usunWszystkieZadaniaButton.Size = new System.Drawing.Size(128, 48);
+            this.usunWszystkieZadaniaButton.Size = new System.Drawing.Size(192, 74);
             this.usunWszystkieZadaniaButton.TabIndex = 5;
             this.usunWszystkieZadaniaButton.Text = "Usuń wszystkie zadania";
             this.usunWszystkieZadaniaButton.UseVisualStyleBackColor = true;
@@ -152,9 +158,10 @@
             // 
             // edytujZadanieButton
             // 
-            this.edytujZadanieButton.Location = new System.Drawing.Point(175, 41);
+            this.edytujZadanieButton.Location = new System.Drawing.Point(262, 63);
+            this.edytujZadanieButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.edytujZadanieButton.Name = "edytujZadanieButton";
-            this.edytujZadanieButton.Size = new System.Drawing.Size(128, 48);
+            this.edytujZadanieButton.Size = new System.Drawing.Size(192, 74);
             this.edytujZadanieButton.TabIndex = 6;
             this.edytujZadanieButton.Text = "Edytuj zadanie";
             this.edytujZadanieButton.UseVisualStyleBackColor = true;
@@ -164,16 +171,18 @@
             // importZadan_label
             // 
             this.importZadan_label.AutoSize = true;
-            this.importZadan_label.Location = new System.Drawing.Point(175, 203);
+            this.importZadan_label.Location = new System.Drawing.Point(262, 312);
+            this.importZadan_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.importZadan_label.Name = "importZadan_label";
-            this.importZadan_label.Size = new System.Drawing.Size(0, 13);
+            this.importZadan_label.Size = new System.Drawing.Size(0, 20);
             this.importZadan_label.TabIndex = 7;
             // 
             // wyswietlPlanPracyButton
             // 
-            this.wyswietlPlanPracyButton.Location = new System.Drawing.Point(31, 329);
+            this.wyswietlPlanPracyButton.Location = new System.Drawing.Point(46, 506);
+            this.wyswietlPlanPracyButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.wyswietlPlanPracyButton.Name = "wyswietlPlanPracyButton";
-            this.wyswietlPlanPracyButton.Size = new System.Drawing.Size(272, 52);
+            this.wyswietlPlanPracyButton.Size = new System.Drawing.Size(408, 80);
             this.wyswietlPlanPracyButton.TabIndex = 8;
             this.wyswietlPlanPracyButton.Text = "Wyświetl plan pracy";
             this.wyswietlPlanPracyButton.UseVisualStyleBackColor = true;
@@ -182,9 +191,9 @@
             // 
             // mainWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1129, 410);
+            this.ClientSize = new System.Drawing.Size(1694, 631);
             this.Controls.Add(this.wyswietlPlanPracyButton);
             this.Controls.Add(this.importZadan_label);
             this.Controls.Add(this.edytujZadanieButton);
@@ -194,8 +203,9 @@
             this.Controls.Add(this.usunZadanieButton);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.dodajZadanieButton);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "mainWindow";
-            this.Text = "Szybki Projekt Na Optymalizacje";
+            this.Text = "Optymalizacja planowania montażu płytek drukowanych";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

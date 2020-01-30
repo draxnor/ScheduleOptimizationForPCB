@@ -217,7 +217,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximumSize = new System.Drawing.Size(1250, 585);
             this.Name = "showWorkPlanWindow";
-            this.Text = "wyswietlPlanPracy";
+            this.Text = "Plan pracy zespołów";
             this.ResumeLayout(false);
 
         }
